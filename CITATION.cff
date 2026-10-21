@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use HOHypEmb in your research, please cite this software as below."
+title: "HOHypEmb: Higher-Order Hyperbolic Embedding of simplicial complexes"
+authors:
+  - family-names: Guillemaud
+    given-names: Martin
+    orcid: "https://orcid.org/0009-0002-2523-8712"
+version: "0.1.0"
+license: "BSD-3-Clause"
+repository-code: "https://github.com/MartinG-38/HOHypEmb"
+keywords:
+  - hyperbolic embedding
+  - simplicial complexes
+  - higher-order networks
+  - Poincaré disk
+  - python
+type: software
+references:
+  - type: software
+    title: "MLNHypEmb: Hyperbolic Embedding for Multilayer Networks"
+    authors:
+      - family-names: Guillemaud
+        given-names: Martin
+    doi: "10.5281/zenodo.15535819"
+  - type: article
+    title: "Hyperbolic embedding of multilayer networks"
+    authors:
+      - family-names: Guillemaud
+        given-names: Martin
+      - family-names: Dinkelacker
+        given-names: Vera
+      - family-names: Chavez
+        given-names: Mario
+    journal: "arXiv preprint"
+    year: 2025
+    doi: "10.48550/arXiv.2505.20378"

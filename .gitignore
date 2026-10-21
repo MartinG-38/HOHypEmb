@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+build/
+dist/
+*.egg-info/
+.venv/
+*.venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.DS_Store
+.idea/
+.vscode/
+data/raw/
+
+# Kept locally, not published (for now): the paper-reproduction pipeline and its tooling,
+# and internal design notes.
+paper/
+tools/ulp_stability.py
+docs/specs/
