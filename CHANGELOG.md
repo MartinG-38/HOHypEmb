@@ -2,7 +2,8 @@
 
 ## 0.1.0 — unreleased
 
-- HHO_3 embedding (`HHOEmbedder`, layer-2 modes `input` / `maximal` / `all_simplices`) and the
+- HHO_3 embedding (`HHOEmbedder`: one layer-2 point per filled triangle by default,
+  `layer2="all_simplices", max_dim=2`; modes `input` / `maximal` kept as options) and the
   classical embedding, reproducing MLNHypEmb to numerical precision (golden tests).
 - Six baselines (weighted clique, star expansion, Zhou hypergraph, three Euclidean) and a registry.
   The weighted clique adds the shared simplex counts to the edge weights after the RA preweighting

@@ -69,7 +69,7 @@ class TestClassicalAndHHO(unittest.TestCase):
     def setUpClass(cls):
         cls.sc = _cora()
         cls.classical = emb.ClassicalEmbedder(**presets.EMBEDDING_PARAMS["cora"])
-        cls.hho = emb.HHOEmbedder(mu=5.0, gamma=1.0, max_dim=5, **presets.EMBEDDING_PARAMS["cora"])
+        cls.hho = emb.HHOEmbedder(mu=5.0, gamma=1.0, layer2="input", max_dim=5, **presets.EMBEDDING_PARAMS["cora"])
         cls.r_cl = cls.classical.fit(cls.sc, seed=0)
         cls.r_hho = cls.hho.fit(cls.sc, seed=0)
 
@@ -135,7 +135,7 @@ class TestPairwiseBlindnessOnControl(unittest.TestCase):
 
     def test_hho_does_differ_across_control_conditions(self):
         a, b, _ = identical_skeleton_pair(n_nodes=150, K=3, n_planted_triangles=200, seed=0)
-        e = emb.HHOEmbedder(mu=5.0, gamma=1.0, max_dim=5, **presets.EMBEDDING_PARAMS["synthetic_control"])
+        e = emb.HHOEmbedder(mu=5.0, gamma=1.0, **presets.EMBEDDING_PARAMS["synthetic_control"])
         self.assertGreater(
             float(np.abs(e.fit(a, seed=0).coords - e.fit(b, seed=0).coords).max()), 1e-6
         )

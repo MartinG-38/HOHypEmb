@@ -241,7 +241,7 @@ class EuclideanStarExpansionEmbedder(Embedder):
 
 
 def build_registry(params: Dict[str, Any], mu: float = 5.0, gamma: float = 1.0,
-                   max_dim: Optional[int] = 5) -> Dict[str, Embedder]:
+                   max_dim: Optional[int] = None) -> Dict[str, Embedder]:
     """All eight embedders keyed by registry name (``"hho"`` for HHO), sharing one parameter set."""
     embedders: List[Embedder] = [
         ClassicalEmbedder(**params),

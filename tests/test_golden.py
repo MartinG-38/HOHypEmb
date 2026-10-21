@@ -64,5 +64,5 @@ def test_hho_leaves_radii_untouched_on_cora():
     sc = _complex(d)
     params = json.loads(str(d["params_json"]))
     r_cl = ClassicalEmbedder(**params).fit(sc, seed=0).radii()
-    r_hho = HHOEmbedder(mu=5.0, gamma=1.0, max_dim=5, **params).fit(sc, seed=0).radii()
+    r_hho = HHOEmbedder(mu=5.0, gamma=1.0, layer2="input", max_dim=5, **params).fit(sc, seed=0).radii()
     assert np.max(np.abs(r_cl - r_hho)) < 1e-12

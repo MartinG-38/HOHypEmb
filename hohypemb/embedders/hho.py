@@ -1,4 +1,4 @@
-"""HHO_3: one second-layer point per higher-order simplex, coupled to its vertices."""
+"""HHO_3: one second-layer point per filled triangle, coupled to its vertices."""
 from typing import Any, List, Optional, Sequence, Tuple
 
 import numpy as np
@@ -19,11 +19,13 @@ class HHOEmbedder(Embedder):
         Coupling between two layer-2 simplices, times their number of shared nodes, when they
         share more than one node.
     layer2
-        ``"input"`` (default): one point per distinct input simplex of dim >= 2;
-        ``"maximal"``: one per maximal input simplex; ``"all_simplices"``: one per face of dim
-        2..max_dim (``max_dim=2``: one layer-2 point per filled triangle).
+        ``"all_simplices"`` (default): one point per face of dim 2..max_dim; with the default
+        ``max_dim=2``, one layer-2 point per filled triangle (a simplex of dimension k >= 3 enters
+        through its triangles). This is HHO as defined in the paper. ``"input"``: one point per
+        distinct input simplex of dim >= 2; ``"maximal"``: one per maximal input simplex.
     max_dim
-        Upper dimension of layer-2 simplices. ``None`` keeps all (required for ``"all_simplices"``).
+        Upper dimension of layer-2 simplices. ``None``: 2 for ``"all_simplices"``, no upper bound
+        for ``"input"`` and ``"maximal"``.
     **params
         Embedding parameters, see ``hohypemb.presets``.
 
@@ -45,12 +47,12 @@ class HHOEmbedder(Embedder):
     space = "poincare"
     LAYER2_MODES = ("input", "maximal", "all_simplices")
 
-    def __init__(self, mu: float = 5.0, gamma: float = 1.0, layer2: str = "input",
+    def __init__(self, mu: float = 5.0, gamma: float = 1.0, layer2: str = "all_simplices",
                  max_dim: Optional[int] = None, **params: Any) -> None:
         if layer2 not in self.LAYER2_MODES:
             raise ValueError(f"layer2 must be one of {self.LAYER2_MODES}, got {layer2!r}")
         if layer2 == "all_simplices" and max_dim is None:
-            raise ValueError("layer2='all_simplices' needs max_dim (max_dim=2: one layer-2 point per filled triangle)")
+            max_dim = 2
         self.mu = float(mu)
         self.gamma = float(gamma)
         self.layer2 = layer2

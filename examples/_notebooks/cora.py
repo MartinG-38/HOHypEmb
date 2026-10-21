@@ -200,17 +200,19 @@ CELLS = [
             grid[gi, mi] = folds.mean()
             grid_lo[gi, mi], grid_hi[gi, mi] = hh.evaluation.bootstrap_ci(folds, n_boot=1000, seed=0)
     baseline20 = knn_accuracy(classical, splits20).mean()
-    best_g, best_m = np.unravel_index(np.argmax(grid), grid.shape)
-    print(f"pairwise baseline {baseline20:.4f}; best HHO {grid[best_g, best_m]:.4f} "
-          f"at mu = {MU_VALUES[best_m]:g}, gamma = {GAMMA_VALUES[best_g]:g}")
+    SLICE_GAMMA = 1.0  # gamma = 0 drops the triangle-triangle coupling, which is half of HHO's second layer
+    slice_g = int(np.flatnonzero(GAMMA_VALUES == SLICE_GAMMA)[0])
+    best_m = int(np.argmax(grid[slice_g]))
+    print(f"pairwise baseline {baseline20:.4f}; best HHO at gamma = {SLICE_GAMMA:g}: "
+          f"{grid[slice_g, best_m]:.4f} at mu = {MU_VALUES[best_m]:g}")
     pd.DataFrame(grid, index=GAMMA_VALUES, columns=MU_VALUES).round(3)
     """),
     code(r"""
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
     hh.plotting.plot_response_surface(axes[0], MU_VALUES, GAMMA_VALUES, grid, cbar_label="k-NN accuracy")
     axes[0].set_title("Coupling response surface")
-    hh.plotting.plot_slice_with_ci(axes[1], MU_VALUES, grid[best_g], grid_lo[best_g], grid_hi[best_g],
-                                   label=f"HHO (γ = {GAMMA_VALUES[best_g]:g})", color=hh.plotting.PALETTE["hho"])
+    hh.plotting.plot_slice_with_ci(axes[1], MU_VALUES, grid[slice_g], grid_lo[slice_g], grid_hi[slice_g],
+                                   label=f"HHO (γ = {SLICE_GAMMA:g})", color=hh.plotting.PALETTE["hho"])
     axes[1].axhline(baseline20, color=hh.plotting.PALETTE["classical"], linestyle="--", linewidth=1.4,
                     label="pairwise baseline")
     axes[1].set_xlabel("μ")
@@ -221,9 +223,11 @@ CELLS = [
     plt.show()
     """),
     md(r"""
-    *What to expect:* HHO beats the pairwise baseline: the best accuracy is 0.427 at μ = 7 (the first
-    row, γ = 0, is printed; every γ gives the same value there), against 0.379 for the pairwise embedding.
-    This is the best cell of the grid on these 20 folds; the untuned μ = 5 of section 1 already gives
+    *What to expect:* HHO beats the pairwise baseline: at γ = 1 (the value used everywhere else, and the
+    slice on the right) the best accuracy is 0.427 at μ = 7, against 0.379 for the pairwise embedding.
+    γ = 0 is shown in the surface only as a limit: it removes the triangle–triangle coupling and keeps
+    just the vertex–triangle links, so it is not a meaningful HHO setting. This is the best μ on these
+    20 folds; the untuned μ = 5 of section 1 already gives
     0.411 against 0.384 (section 2). The gain exists over a bounded range of μ. On cora, a coupling that
     is too strong (μ ≥ 10) pulls nodes toward their triangles so hard that the result falls below the
     pairwise embedding. For μ ≥ 7 the value of γ does not change the accuracy; at smaller μ it moves it by

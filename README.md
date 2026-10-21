@@ -2,8 +2,9 @@
 
 Higher-order hyperbolic embedding (**HHO**) of simplicial complexes in the Poincaré disk.
 
-HHO embeds a simplicial complex by adding a second layer with one point per higher-order simplex,
-coupled to its vertices (strength μ) and to overlapping simplices (strength γ), and embedding the
+HHO embeds a simplicial complex by adding a second layer with one point per filled triangle
+(a larger simplex enters through its triangles), coupled to its vertices (strength μ) and to the
+triangles sharing an edge with it (strength γ), and embedding the
 two-layer network with the MLNHypEmb machinery. A node's radius is a fixed function of its
 weighted degree in the (RA-preweighted, when `preweight=True`) pairwise graph, identical in the
 classical and the HHO embedding: **HHO changes only angles**.

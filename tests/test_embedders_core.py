@@ -33,9 +33,14 @@ def test_layer2_modes(layer2, max_dim, expected):
     assert res.coords.shape == (6, 2)
 
 
+def test_default_layer2_is_one_point_per_filled_triangle():
+    for embedder in (hh.HHOEmbedder(**PARAMS), hh.HHOEmbedder(layer2="all_simplices", **PARAMS)):
+        assert (embedder.layer2, embedder.max_dim) == ("all_simplices", 2)
+        assert embedder.fit(_toy(), seed=0).meta["n_layer2"] == 5
+    assert hh.HHOEmbedder(layer2="input", **PARAMS).max_dim is None
+
+
 def test_layer2_argument_errors():
-    with pytest.raises(ValueError, match="max_dim"):
-        hh.HHOEmbedder(layer2="all_simplices")
     with pytest.raises(ValueError, match="layer2"):
         hh.HHOEmbedder(layer2="facets")
 
