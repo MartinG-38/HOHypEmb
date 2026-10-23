@@ -75,9 +75,10 @@ CELLS = [
     markers_table.round(3)
     """),
     md(r"""
-    *What to expect:* the median area ratio is below 1 on both models (0.41 on Holme–Kim, 0.60 on
-    Erdős–Rényi), and 77% and 66% of the filled triangles shrink. Under HHO the empty triangles are
-    larger than the filled ones on both models (fold 8.3 on Holme–Kim, 1.3 on Erdős–Rényi).
+    *What to expect:* the median area ratio is below 1 on both models (0.41 on Holme–Kim, 0.014 on
+    Erdős–Rényi), and 77% and 99% of the filled triangles shrink. Under HHO the empty triangles are
+    larger than the filled ones on both models (fold 8.3 on Holme–Kim, 65 on Erdős–Rényi): the area
+    markers follow the triangles given to HHO on either graph.
     """),
     md(r"""
     ## 3. The synthesis figure

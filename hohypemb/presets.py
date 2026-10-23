@@ -20,10 +20,8 @@ EMBEDDING_PARAMS: Dict[str, Dict[str, Any]] = {
     "ecoli": _params(True, 10000, "Isomap", 1.5),
     "synthetic_holme_kim": _params(True, 2000, "Isomap", 5),
     "synthetic_small_world": _params(True, 220, "Isomap", 2),
-    # beta=200/20 (pre-2026-09-28) saturated the radial rule: 52/100 ER nodes and 9/100 BA
-    # nodes had r < 1e-6, making the E7/E8 angle and area statistics uninterpretable for both
-    # models. Recalibrated so beta is on the same
-    # order as each model's RA-preweighted strength, as it already was for holme_kim/small_world.
+    # beta is on the order of each model's RA-preweighted strength, so that the radial rule does
+    # not saturate (a much smaller beta puts many nodes at r < 1e-6, at the center of the disk)
     "synthetic_erdos_renyi": _params(True, 2000, "Isomap", 2),
     "synthetic_barabasi_albert": _params(True, 300, "Isomap", 2),
     # identical-skeleton control (E2) and the tests ported from the author's earlier research code

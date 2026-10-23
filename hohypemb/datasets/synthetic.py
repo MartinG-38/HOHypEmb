@@ -158,7 +158,8 @@ _GENERATORS = {
                   lambda rng, n, m, p: nx.powerlaw_cluster_graph(n, m, p, seed=rng)),
     "small_world": (104, {"n": 80, "k": 4, "p": 0.3},
                     lambda rng, n, k, p: nx.watts_strogatz_graph(n, k, p, seed=rng)),
-    "erdos_renyi": (103, {"n": 100, "p": 0.15},
+    # erdos_renyi: same size as holme_kim and about as many triangles (175 against 178)
+    "erdos_renyi": (103, {"n": 500, "p": 0.02},
                     lambda rng, n, p: nx.erdos_renyi_graph(n, p, seed=rng)),
     "barabasi_albert": (102, {"n": 100, "m": 2},
                         lambda rng, n, m: nx.barabasi_albert_graph(n, m, seed=rng)),

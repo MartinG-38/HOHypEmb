@@ -20,7 +20,7 @@ def test_reproduces_the_notebook_generator(model, fixture):
 
 
 def test_all_models_and_sizes():
-    sizes = {"holme_kim": 500, "small_world": 80, "erdos_renyi": 100, "barabasi_albert": 100}
+    sizes = {"holme_kim": 500, "small_world": 80, "erdos_renyi": 500, "barabasi_albert": 100}
     for model in MODELS:
         # randint(0, 100) is inclusive, so p_surface=101 is the value that fills every triangle
         sc = planted_surfaces(model, p_surface=101)
