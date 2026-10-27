@@ -85,7 +85,7 @@ class TestRankNormalisedSilhouette(unittest.TestCase):
         self.assertGreaterEqual(out["hi"], out["score"])
 
     def test_invariant_to_a_monotone_reshaping_that_moves_raw_silhouette(self):
-        """The whole point of the transform (final review, C3): rank-normalised
+        """The whole point of the transform: rank-normalised
         silhouette is invariant under ANY monotone reshaping of the distances,
         not merely a uniform rescale (which raw silhouette already tolerates,
         since it is scale-invariant on its own). A cube is monotone on

@@ -22,6 +22,7 @@ CELLS = [
     code(r"""
     import os
     import sys
+    import warnings
 
     import matplotlib.pyplot as plt
     import numpy as np
@@ -54,6 +55,7 @@ CELLS = [
     code(r"""
     PARAMS = hh.presets.EMBEDDING_PARAMS["ecoli"]
     classical = hh.ClassicalEmbedder(**PARAMS).fit(sc, seed=0)
+    warnings.filterwarnings("ignore", message="Embedding .* dense matrices")  # memory cost stated above
     hho = hh.HHOEmbedder(mu=15, gamma=0.5, layer2="all_simplices", max_dim=2, **PARAMS).fit(sc, seed=0)
 
     counts = pd.Series(sc.node_labels).value_counts()

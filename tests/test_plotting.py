@@ -133,7 +133,7 @@ class TestOtherPanels(unittest.TestCase):
         experiment is deliberately NON-UNIFORM (mirrors [0.5,1,2,3,5,7,10,15,20]),
         which under ``imshow(extent=...)`` spreads columns uniformly and draws
         every cell at the WRONG position relative to its true value -- the
-        true optimum at mu=3 was drawn at mu=8.08 (final review, C2). This
+        true optimum at mu=3 was drawn at mu=8.08. This
         pins the fix: the maximum cell's true value must appear as the tick
         label at its own INDEX position, not be linearly interpolated."""
         mu = np.array([0.5, 1, 2, 3, 5, 7, 10, 15, 20])   # non-uniform, as in production

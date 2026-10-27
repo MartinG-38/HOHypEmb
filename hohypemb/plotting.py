@@ -116,7 +116,7 @@ def plot_response_surface(ax, mu_values, gamma_values, grid,
     experiment are non-uniform (e.g. mu = [0.5, 1, 2, 3, 5, 7, 10, 15, 20]),
     and ``extent`` spreads columns UNIFORMLY across the given range regardless
     of the actual value spacing -- so a non-uniform grid's cells are drawn at
-    the wrong positions relative to their true values (final review, C2: the
+    the wrong positions relative to their true values (e.g. the
     true optimum at mu=3 was drawn at mu=8.08, disagreeing with the adjacent
     line panel by a factor of 2.7). Indexing by position is honest about what
     the grid actually is -- a set of sampled values, not a continuum -- and

@@ -113,7 +113,7 @@ CELLS = [
     prec_hho = hh.markers.partner_precision_at_k(sc, hho, k=5)
     differs = np.any(prec_hho.precision != prec_cl.precision)
     p = wilcoxon(prec_hho.precision, prec_cl.precision).pvalue if differs else float("nan")
-    print(f"{len(prec_hho.eligible)} eligible authors; mean precision@5: classical {prec_cl.mean:.3f}, "
+    print(f"{len(prec_hho.eligible)} eligible authors; mean precision@5: pairwise {prec_cl.mean:.3f}, "
           f"HHO {prec_hho.mean:.3f} (paired Wilcoxon p = {p:.1e})")
     fig, ax = plt.subplots(figsize=(3, 4))
     hh.plotting.plot_partner_precision(ax, prec_cl, prec_hho)
@@ -134,7 +134,7 @@ CELLS = [
     code(r"""
     dist_cl = hh.markers.global_distortion(sc, classical)
     dist_hho = hh.markers.global_distortion(sc, hho)
-    print(f"Spearman rho, distance vs hops: classical {dist_cl.spearman_rho:.3f}, HHO {dist_hho.spearman_rho:.3f}")
+    print(f"Spearman rho, distance vs hops: pairwise {dist_cl.spearman_rho:.3f}, HHO {dist_hho.spearman_rho:.3f}")
 
     fig, ax = plt.subplots(figsize=(5, 4))
     hh.plotting.plot_distortion(ax, dist_cl, dist_hho)
@@ -148,7 +148,7 @@ CELLS = [
         return d.hop_values[k], share
 
 
-    for name, d in (("classical", dist_cl), ("HHO", dist_hho)):
+    for name, d in (("pairwise", dist_cl), ("HHO", dist_hho)):
         peak, share = peak_hops(d)
         print(f"{name:9s} median distance peaks at {peak} hops; {share:.0%} of the pairs are within {peak} hops")
     """),
