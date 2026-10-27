@@ -122,7 +122,7 @@ def rank_normalised_silhouette(D: np.ndarray, labels, n_boot: int = 300,
                                seed: int = 0) -> Dict[str, float]:
     """Silhouette computed on a RANK-transformed distance matrix, with a bootstrap CI.
 
-    Why this exists (final review, finding C3): raw silhouette is scale
+    Why this exists: raw silhouette is scale
     INVARIANT (uniformly rescaling every distance by a constant does not
     change it) but is NOT invariant to a change in the overall SHAPE of the
     distance distribution -- and the embedders compared in this project are
