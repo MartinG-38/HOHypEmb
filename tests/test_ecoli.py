@@ -6,14 +6,12 @@ import sys
 import textwrap
 from pathlib import Path
 
-import numpy as np
 import pytest
 
 import hohypemb.datasets.ecoli as ecoli_module
 from hohypemb.datasets.ecoli import _fetch_cog_mappings, load_ecoli
-from tests._data import SNAPSHOT_DIR
+from tests._data import SNAPSHOT_DIR, load_golden
 
-GOLDEN = Path(__file__).parent / "golden"
 ROOT = Path(__file__).resolve().parents[1]
 HEADER = ["Complex ac", "Recommended name", "Aliases", "Taxonomy identifier",
           "Identifiers (and stoichiometry) of molecules in complex", "Expanded participant list"]
@@ -63,7 +61,7 @@ def test_max_nodes_truncates_the_core(tmp_path):
 def test_matches_the_original_analysis_on_the_paper_snapshot():
     if SNAPSHOT_DIR is None:
         pytest.skip("needs HOHYPEMB_SNAPSHOT_DIR")
-    d = np.load(GOLDEN / "G4_ecoli_300_structure.npz", allow_pickle=False)
+    d = load_golden("G4_ecoli_300_structure")
     sc = load_ecoli(max_nodes=300, data_dir=SNAPSHOT_DIR).giant_component()
     assert sc.node_names == [str(x) for x in d["nodelist"]]
     assert {tuple(sorted(e)) for e in sc.one_skeleton.edges()} == {tuple(e) for e in d["edges"]}

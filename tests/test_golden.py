@@ -1,6 +1,5 @@
 """HOHypEmb must reproduce MLNHypEmb on every golden fixture . Never loosen tolerances."""
 import json
-from pathlib import Path
 
 import networkx as nx
 import numpy as np
@@ -9,8 +8,8 @@ from scipy.spatial.distance import cdist
 
 from hohypemb import ClassicalEmbedder, HHOEmbedder, SimplicialComplex
 from hohypemb.geometry import angular_dist_matrix, clip_to_disk
+from tests._data import load_golden
 
-GOLDEN = Path(__file__).parent / "golden"
 CASES = [("G1_holme_kim", "input", None), ("G2_small_world", "input", None),
          ("G3_cora", "input", 5), ("G5_ecoli_250", "all_simplices", 2),
          ("G6_control_spectral", "input", None)]
@@ -43,7 +42,7 @@ def _complex(d):
 @pytest.mark.golden
 @pytest.mark.parametrize("name,layer2,max_dim", CASES)
 def test_matches_mlnhypemb(name, layer2, max_dim):
-    d = np.load(GOLDEN / f"{name}.npz", allow_pickle=False)
+    d = load_golden(name)
     sc = _complex(d)
     params = json.loads(str(d["params_json"]))
     seed = int(d["seed"])
@@ -60,7 +59,7 @@ def test_matches_mlnhypemb(name, layer2, max_dim):
 
 @pytest.mark.golden
 def test_hho_leaves_radii_untouched_on_cora():
-    d = np.load(GOLDEN / "G3_cora.npz", allow_pickle=False)
+    d = load_golden("G3_cora")
     sc = _complex(d)
     params = json.loads(str(d["params_json"]))
     r_cl = ClassicalEmbedder(**params).fit(sc, seed=0).radii()

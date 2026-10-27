@@ -18,3 +18,8 @@ data/raw/
 paper/
 tools/ulp_stability.py
 docs/specs/
+
+# Golden fixtures built on third-party data (cora, E. coli): kept locally, not published.
+tests/golden/G3_cora.npz
+tests/golden/G4_ecoli_300_structure.npz
+tests/golden/G5_ecoli_250.npz

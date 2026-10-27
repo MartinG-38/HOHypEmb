@@ -30,3 +30,20 @@ def require(path: Optional[str]) -> str:
             "needs HOHYPEMB_SNAPSHOT_DIR pointing to the reference data files"
         )
     return path
+
+
+GOLDEN_DIR = Path(__file__).parent / "golden"
+
+
+def load_golden(name: str):
+    """Load ``tests/golden/<name>.npz``; skip the calling test when it is missing.
+
+    The fixtures built on third-party data (cora, E. coli) are kept locally and not
+    published (see .gitignore).
+    """
+    import numpy as np
+
+    path = GOLDEN_DIR / f"{name}.npz"
+    if not path.exists():
+        raise unittest.SkipTest(f"{path.name} is not distributed (third-party data)")
+    return np.load(path, allow_pickle=False)
