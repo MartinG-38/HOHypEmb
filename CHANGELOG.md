@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 — unreleased
+## 0.1.0 — 2026-10-27
 
 - HHO_3 embedding (`HHOEmbedder`: one layer-2 point per filled triangle by default,
   `layer2="all_simplices", max_dim=2`; modes `input` / `maximal` kept as options) and the
