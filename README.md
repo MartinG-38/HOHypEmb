@@ -1,5 +1,7 @@
 # HOHypEmb
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23695140.svg)](https://doi.org/10.5281/zenodo.23695140)
+
 Higher-order hyperbolic embedding (**HHO**) of simplicial complexes in the Poincaré disk.
 
 HHO embeds a simplicial complex by adding a second layer with one point per filled triangle
@@ -90,7 +92,8 @@ recommended (CC BY 4.0 permits redistribution with attribution).
 
 ## Citation
 
-See `CITATION.cff`. HOHypEmb builds on MLNHypEmb (doi:10.5281/zenodo.15535819, arXiv:2505.20378).
+Software DOI (all versions): [10.5281/zenodo.23695140](https://doi.org/10.5281/zenodo.23695140); see `CITATION.cff`.
+HOHypEmb builds on MLNHypEmb (doi:10.5281/zenodo.15535819, arXiv:2505.20378).
 
 ## License
 
